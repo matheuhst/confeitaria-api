@@ -1,21 +1,20 @@
-def buscar_cardapio():
-    itens = [
-        {
-            "id": 1,
-            "nome": "Chocomoça",
-            "descrição": "Bolo de chocolate chocante (para mocas).",
-            "preço": 49.99,
-            "foto": "shop"
-        }
-    ]
+from conexao import get_conexao
+from psycopg2.extras import RealDictCursor
+from flask import jsonify
 
-    return itens
+def buscar_cardapio():
+    conn = get_conexao()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cursor.execute("SELECT * FROM cardapio")
+    cardapio = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return jsonify(cardapio)
 
 def buscar_por_id(item_id):
     return{
         "id": 1,
         "nome": "Chocomoça",
-        "descrição": "Bolo de chocolate chocantees (para mocas).",
-        "preço": 49.99,
-        "foto": "shop"
+        "descricao": "Bolo de chocolate com ninho",
+        "preco": 49.99
     }
