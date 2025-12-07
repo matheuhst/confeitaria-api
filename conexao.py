@@ -3,9 +3,9 @@ import psycopg2
 def get_conexao():
     conn = psycopg2.connect(
         dbname='postgres',
-        user='postgres.qspaxlhdopzkpdhlfcvo',
+        user='postgres',
         password='matheus726',
-        host='aws-1-us-east-1.pooler.supabase.com',
-        port='6543'
+        host='db.yfjtvltaxbxrtzizagkk.supabase.co',
+        port='5432'
     )
     return conn
