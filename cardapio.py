@@ -12,9 +12,16 @@ def buscar_cardapio():
     return jsonify(cardapio)
 
 def buscar_por_id(item_id):
-    return{
-        "id": 1,
-        "nome": "Bolo de chocolate",
-        "descricao": "Delicioso",
-        "preco": 10
-    }
+    conn = get_conexao()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    cursor.execute("SELECT * FROM cardapio WHERE id = %s", (item_id,))
+    item = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    if item:
+        return jsonify(item)
+    else:
+        return jsonify({"erro": "Item não encontrado"}), 404
