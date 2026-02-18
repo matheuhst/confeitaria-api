@@ -9,3 +9,4 @@ def get_conexao():
         port='5432'
     )
     return conn
+    
